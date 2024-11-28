@@ -44,12 +44,8 @@ def main(_):
                                    M=0,
                                    actor_dropout_rate=0.1, 
                                    actor_num_blocks=3,
-                                   actor_weight_decay=None,
                                    actor_tau=0.001,
-                                   actor_architecture='ln_resnet',
-                                   critic_objective='expectile',
                                    beta_schedule='vp',
-                                   actor_objective='bc',
                                    decay_steps=int(2e6), #Change this to int(4e6) for (2) (because you are finetuning actor)
                                    actor_layer_norm=True,
                                ))
@@ -64,6 +60,9 @@ def main(_):
     variants = [constant_parameters]
     name_keys = ['experiment_name', 'env_name']
     variants = set_hyperparameters(sweep_parameters, variants, name_keys)
+
+    print(len(variants))  # 60
+
 
     inference_sweep_parameters = dict(
                             N = [128],
